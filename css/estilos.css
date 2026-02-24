@@ -1,37 +1,53 @@
-/* General Styles */
+/* =========================
+   GENERAL STYLES
+========================= */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    background-color: #f0f8ff;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
 }
+
+/* =========================
+   FORM CONTAINER
+========================= */
 
 .form-container {
     background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 95%;
+    max-width: 420px;
     text-align: center;
-    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    margin-bottom: 25px;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
 }
 
 .form-title {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2c5364;
+    margin-bottom: 25px;
 }
 
 .icon {
     font-size: 1.2rem;
-    color: #0056b3;
+    color: #2c5364;
 }
+
+/* =========================
+   FORM STRUCTURE
+========================= */
 
 form {
     display: flex;
@@ -40,46 +56,69 @@ form {
 }
 
 label {
-    font-size: 0.9rem;
-    color: #555;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #444;
     text-align: left;
+    margin-bottom: -8px;
 }
 
-input, select, button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
+/* =========================
+   INPUTS & SELECTS
+========================= */
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #f8f9fa;
     transition: all 0.3s ease;
 }
 
-input:focus, select:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-button {
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:active {
-    transform: scale(0.98);
+input:focus,
+select:focus {
+    border-color: #2c5364;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(44, 83, 100, 0.3);
+    outline: none;
 }
 
 input[readonly] {
-    background-color: #f9f9f9;
+    background-color: #e9ecef;
     cursor: not-allowed;
 }
 
-/* Highlight animation for autocompleted fields */
+/* =========================
+   BUTTON
+========================= */
+
+button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* =========================
+   AUTOCOMPLETE HIGHLIGHT
+========================= */
+
 .highlight {
     animation: highlightFade 1s ease-in-out;
 }
@@ -93,39 +132,61 @@ input[readonly] {
     }
 }
 
-/* Styles for the dynamic table */
+/* =========================
+   TABLE CONTAINER
+========================= */
+
 #table-container {
-    margin-top: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 30px;
+    overflow-x: auto;
 }
+
+/* =========================
+   TABLE STYLES
+========================= */
 
 #table-container table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 auto;
-}
-
-#table-container th, #table-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 #table-container th {
-    background-color: #ffffff00;
-    color: lab(0% 0 0 / 0.966);
+    background: #2c5364;
+    color: #ffffff;
+    padding: 12px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.hidden {
-    display: none;
+#table-container td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.85rem;
 }
 
-/* Action buttons */
+#table-container tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
 .action-btn {
     cursor: pointer;
     border: none;
-    background: none;
-    font-size: 1.2rem;
-    margin: 0 5px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
 }
 
 .action-btn.edit {
@@ -133,5 +194,34 @@ input[readonly] {
 }
 
 .action-btn.delete {
-    color: #FF0000;
+    color: #dc3545;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    background: #e2e8f0;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+.hidden {
+    display: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+    }
+
+    #table-container th,
+    #table-container td {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
 }
