@@ -225,3 +225,49 @@ button:active {
         padding: 8px;
     }
 }
+
+/* =========================
+   ORIENTATION-SPECIFIC STYLES
+========================= */
+
+/* Reglas específicas para orientación horizontal */
+@media (orientation: landscape) {
+    .form-container {
+        padding: 15px;
+        width: 90%;
+        max-width: 600px; /* Limitar el ancho para evitar desbordes */
+    }
+
+    #table-container {
+        max-width: 800px; /* Ajustar el ancho máximo de la tabla */
+    }
+
+    #table-container th,
+    #table-container td {
+        font-size: 0.8rem; /* Reducir el tamaño de fuente */
+        padding: 6px; /* Ajustar el padding */
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.85rem; /* Ajustar el tamaño de fuente del botón */
+    }
+}
+
+/* Reglas específicas para orientación vertical */
+@media (orientation: portrait) {
+    .form-container {
+        width: 95%;
+        max-width: 420px; /* Mantener el diseño compacto */
+    }
+
+    #table-container {
+        max-width: 100%; /* Asegurar que la tabla no desborde */
+    }
+
+    #table-container th,
+    #table-container td {
+        font-size: 0.75rem; /* Ajustar el tamaño de fuente para pantallas pequeñas */
+        padding: 8px;
+    }
+}
