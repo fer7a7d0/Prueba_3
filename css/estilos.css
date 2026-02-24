@@ -1,187 +1,137 @@
-/* ============================= */
-/* VARIABLES GLOBALES */
-/* ============================= */
-:root {
-    --primary: #0056b3;
-    --primary-hover: #004494;
-    --danger: #ff4d4d;
-    --bg: #f4f9ff;
-    --white: #ffffff;
-    --text-dark: #222;
-    --text-medium: #555;
-    --border: #ddd;
-    --radius: 12px;
-}
-
-/* ============================= */
-/* BODY */
-/* ============================= */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 12px;
-    background-color: var(--bg);
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    background-color: #f0f8ff;
 }
 
-/* ============================= */
-/* CONTENEDOR FORMULARIO */
-/* ============================= */
 .form-container {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    padding: 18px;
-    width: 100%;
-    max-width: 100%;
-}
-
-/* ============================= */
-/* TÍTULO */
-/* ============================= */
-.form-title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--text-dark);
-    margin-bottom: 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-/* ============================= */
-/* FORMULARIO */
-/* ============================= */
+.form-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.icon {
+    font-size: 1.2rem;
+    color: #0056b3;
+}
+
 form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 15px;
 }
 
-/* ============================= */
-/* LABELS */
-/* ============================= */
 label {
     font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--text-medium);
+    color: #555;
+    text-align: left;
 }
 
-/* ============================= */
-/* INPUTS Y SELECT */
-/* ============================= */
-input,
-select {
-    padding: 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 16px; /* IMPORTANTE para evitar zoom en iPhone */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-input:focus,
-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
-}
-
-/* Campos solo lectura */
-input[readonly] {
-    background-color: #f2f2f2;
-}
-
-/* ============================= */
-/* BOTÓN PRINCIPAL */
-/* ============================= */
-button {
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-    padding: 16px;
-    border-radius: var(--radius);
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-button:active {
-    transform: scale(0.97);
+input:focus, select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--primary-hover);
+    background-color: #0056b3;
 }
 
-/* ============================= */
-/* TABLA */
-/* ============================= */
-#table-container {
-    width: 100%;
-    margin-top: 20px;
-    overflow-x: auto; /* CLAVE para móvil */
+button:active {
+    transform: scale(0.98);
 }
 
-table {
-    border-collapse: collapse;
-    min-width: 600px; /* fuerza scroll horizontal */
-    width: 100%;
-    background: var(--white);
-    border-radius: var(--radius);
-    overflow: hidden;
+input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
 }
 
-th,
-td {
-    border: 1px solid var(--border);
-    padding: 10px;
-    font-size: 0.85rem;
-    text-align: center;
-}
-
-th {
-    background-color: var(--primary);
-    color: var(--white);
-    font-size: 0.9rem;
-}
-
-/* ============================= */
-/* BOTONES DE ACCIÓN */
-/* ============================= */
-.action-btn {
-    font-size: 1.3rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 6px;
-    transition: transform 0.2s ease;
-}
-
-.action-btn:active {
-    transform: scale(1.3);
-}
-
-.action-btn.edit {
-    color: var(--primary);
-}
-
-.action-btn.delete {
-    color: var(--danger);
-}
-
-/* ============================= */
-/* ANIMACIÓN AUTOCOMPLETADO */
-/* ============================= */
+/* Highlight animation for autocompleted fields */
 .highlight {
     animation: highlightFade 1s ease-in-out;
 }
 
 @keyframes highlightFade {
     from {
-        background-color: #d8f3ff;
+        background-color: #e0f7fa;
     }
     to {
         background-color: transparent;
     }
+}
+
+/* Styles for the dynamic table */
+#table-container {
+    margin-top: 20px;
+}
+
+#table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+#table-container th, #table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#table-container th {
+    background-color: #ffffff00;
+    color: lab(0% 0 0 / 0.966);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Action buttons */
+.action-btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    margin: 0 5px;
+}
+
+.action-btn.edit {
+    color: #007BFF;
+}
+
+.action-btn.delete {
+    color: #FF0000;
 }
