@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Inventario 📝</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="form-title">Registro de Inventario <span class="icon">📝</span></h1>
+        <form id="inventory-form">
+            <label for="name">Nombre</label>
+            <select id="name" required>
+                <option value="">Seleccionar nombre</option>
+                <option value="Fernando Moreno">Fernando Moreno</option>
+                <option value="Humberto Huerta">Humberto Huerta</option>
+                <option value="Christian Molina">Christian Molina</option>
+                <option value="Jose Zapata">Jose Zapata</option>
+                <option value="Orlando Ibarra">Orlando Ibarra</option>
+            </select>
+
+            <label for="area">Área</label>
+            <select id="area" required>
+                <option value="">Seleccionar área</option>
+                <option value="Rampa 1">Rampa 1</option>
+                <option value="Rampa 2">Rampa 2</option>
+                <option value="Rampa 3">Rampa 3</option>
+            </select>
+
+            <label for="code">Código</label>
+            <input type="tel" id="code" pattern="[0-9]*" inputmode="numeric" required>
+
+            <input type="text" id="product" readonly placeholder="Descripción de producto">
+            <input type="text" id="tt" readonly placeholder="Tanque termo">
+
+            <label for="cylinders">Cilindros</label>
+            <input type="tel" id="cylinders" pattern="[0-9]*" inputmode="numeric" required>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <!-- Placeholder for Dynamic Table -->
+    <div id="table-container"></div>
+    <script src="js/app.js"></script>
+</body>
+</html>
