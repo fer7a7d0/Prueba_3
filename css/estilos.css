@@ -13,7 +13,7 @@ body {
 
 .form-container {
     background: #ffffff;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 90%;
@@ -24,7 +24,7 @@ body {
 }
 
 .form-container:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px);
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
 }
 
@@ -65,19 +65,26 @@ input:focus, select:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+/* Botones */
 button {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #007bff, #0056b3);
     color: #fff;
     border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 input[readonly] {
