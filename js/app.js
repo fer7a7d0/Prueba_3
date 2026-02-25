@@ -54,6 +54,26 @@ codeInput.addEventListener('input', () => {
 });
 
 // Validación básica antes de enviar
+// 🔹 URL de tu Apps Script (reemplazar)
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbx92Cm9nINZmkzFl5FAtIVCux9RVIBVUyDomCTjQcTrTB3OOA1mjxSunyiQ2ZmCmA/exec";
+
+// 🔹 Función para enviar datos a Google Sheets
+function enviarASheets(registro) {
+    fetch(SHEETS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(registro)
+    })
+    .then(() => {
+        console.log("Intento de envío realizado");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -85,17 +105,23 @@ form.addEventListener('submit', (event) => {
         submitButton.textContent = 'Enviar';
     } else {
         // Create a new record
+        
         const newRecord = {
             id: recordId++,
-            date: currentDate, // Add the current date
+            date: currentDate,
             name,
             area,
             code,
             product,
             tt,
             cylinders
-        };
-        records.push(newRecord);
+    };
+
+    records.push(newRecord);
+
+    // 🔥 Enviar automáticamente a Google Sheets
+    enviarASheets(newRecord);
+        
     }
 
     updateTable();
@@ -279,3 +305,19 @@ function resetForm() {
     form.reset();
     document.getElementById('name').focus();
 }
+
+// Generar sugerencias para el campo de código
+function generarSugerencias() {
+    const dataList = document.getElementById('code-suggestions');
+    dataList.innerHTML = ''; // Limpiar opciones previas
+
+    Object.keys(baseDatos).forEach(code => {
+        const option = document.createElement('option');
+        option.value = code; // El valor será el código
+        option.textContent = `${code} - ${baseDatos[code].producto}`; // Mostrar código y producto
+        dataList.appendChild(option);
+    });
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener('DOMContentLoaded', generarSugerencias);

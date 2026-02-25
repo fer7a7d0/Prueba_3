@@ -29,7 +29,8 @@
             </select>
 
             <label for="code">Código</label>
-            <input type="tel" id="code" pattern="[0-9]*" inputmode="numeric" required>
+            <input type="tel" id="code" list="code-suggestions" pattern="[0-9]*" inputmode="numeric" required>
+            <datalist id="code-suggestions"></datalist>
 
             <input type="text" id="product" readonly placeholder="Descripción de producto">
             <input type="text" id="tt" readonly placeholder="Tanque termo">
