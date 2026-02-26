@@ -1,8 +1,25 @@
 // Base de datos interna
 const baseDatos = {
-    122: { producto: "Dewar de Argón", tt: "Argón" },
-    130: { producto: "Dewar de Oxígeno", tt: "Oxígeno" },
-    131: { producto: "Dewar de Nitrógeno", tt: "Nitrógeno" }
+    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "211" },
+    130: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
+    131: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "211" },
+    133: { producto: "NITROGENO LIQUIDO DEWAR 22 PSI", tt: "211" },
+    138: { producto: "M3 NITROGENO DEWAR ABIERTO", tt: "211" },
+    141: { producto: "INFRA COLD NUGGET", tt: "211" },
+    206: { producto: "M3. OXIGENO MEDICIN.LIQUID.THERMO DW", tt: "211" },
+    222: { producto: "ACETILENO KG. MCA INFRA VALVULA CGA", tt: "211" },
+    239: { producto: "NITR?GENO INDUSTRIAL MEGADEWAR 230L", tt: "211" },
+    246: { producto: "NITROGENO SPARKLASER DEWAR 230L (350PSI)", tt: "211" },
+    247: { producto: "NITROGENO LIQ FRESCOPACK DEWAR 230LTS (22 PSI)", tt: "211" },
+    270: { producto: "NITROGENO IND. LIQUIDO MINIBULK 230 LTS.", tt: "211" },
+    385: { producto: "CO2 INDUSTRIAL LIQUIDO DEWAR 230LTS (350PSI)", tt: "211" },
+    386: { producto: "NITROGENO 4.7 LIQ DEWAR 230LTS (350PSI)", tt: "211" },
+    387: { producto: "NITROGENO LIQUIDO FRESCOPACK DEWAR 230LTS (350PSI)", tt: "211" },
+    388: { producto: "NITROGENO LIQUIDO INDUSTRIAL DEWAR 230LTS (350PSI)", tt: "211" },
+    389: { producto: "OXIGENO LIQUIDO SPARK LASER ASISTENCIA DEWAR 230LT", tt: "211" },
+    396: { producto: "ARGON INDUSTRIAL LIQUIDO DEWAR 230LTS (350PSI)", tt: "211" },
+    397: { producto: "OXIGENO INDUSTRIAL LIQUIDO  DEWAR 230LTS (350PSI)", tt: "211" },
+    398: { producto: "OXIGENO MEDICINAL LIQUIDO DEWAR 230 LTS (350PSI)", tt: "211" },
 };
 
 // Referencias a los elementos del formulario
