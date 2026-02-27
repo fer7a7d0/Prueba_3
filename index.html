@@ -114,6 +114,59 @@
     ============================================================ -->
     <script src="js/app.js"></script>
 
+    <!-- =========================
+     BOTÓN SCROLL DINÁMICO
+========================= -->
+    <button id="scrollToggleBtn" class="scroll-toggle" aria-label="Navegar">
+        ↓
+    </button>
+    
+    
+    <!-- =========================
+         SCRIPT SCROLL INFERIOR
+    ========================= -->
+    
+    <script>
+    const scrollBtn = document.getElementById("scrollToggleBtn");
+    
+    window.addEventListener("scroll", () => {
+    
+        const scrollPosition = window.innerHeight + window.scrollY;
+        const bottomPosition = document.documentElement.scrollHeight - 10;
+    
+        // Si estás en el fondo
+        if (scrollPosition >= bottomPosition) {
+            scrollBtn.style.display = "block";
+            scrollBtn.textContent = "↑";
+        } 
+        // Si no estás en el fondo
+        else {
+            scrollBtn.style.display = "block";
+            scrollBtn.textContent = "↓";
+        }
+    
+        // Si el contenido no necesita scroll
+        if (document.documentElement.scrollHeight <= window.innerHeight) {
+            scrollBtn.style.display = "none";
+        }
+    });
+    
+    scrollBtn.addEventListener("click", () => {
+    
+        const isAtBottom = (window.innerHeight + window.scrollY) >= 
+                           document.documentElement.scrollHeight - 10;
+    
+        if (isAtBottom) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+    });
+    </script>
+
 </body>
 
 </html>

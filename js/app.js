@@ -11,7 +11,7 @@ const baseDatos = {
     127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "213" },
     128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "214" },
     129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "214" },
-    130: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "214" }
+    30006618: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "214" }
 };
 
 
@@ -107,7 +107,7 @@ form.addEventListener('submit', (event) => {
     const product = productInput.value;
     const tt = ttInput.value;
     const cylinders = cylindersInput.value;
-    const currentDate = new Date().toISOString().split('T')[0];
+    const currentDate = new Date().toLocaleDateString('en-CA'); // Formato ISO (YYYY-MM-DD)
 
     const submitButton = form.querySelector('button[type="submit"]');
 
@@ -385,3 +385,4 @@ downloadButton.addEventListener("click", () => {
     tableContainer.innerHTML = "";
     downloadButton.style.display = "none";
 });
+
