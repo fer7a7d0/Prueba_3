@@ -25,7 +25,7 @@ const cylindersInput = document.getElementById('cylinders');
 const areaInput = document.getElementById('area');
 const form = document.getElementById('inventory-form');
 const tableContainer = document.getElementById('table-container');
-
+const codeSuggestions = document.getElementById('code-suggestions');
 
 /* ============================================================
    🔹 3. VARIABLES GLOBALES
@@ -94,6 +94,25 @@ codeInput.addEventListener('input', () => {
     }
 });
 
+/* ============================================================
+   🔹 13. GENERAR OPCIONES PARA EL DATALIST DE CÓDIGOS
+============================================================ */
+function generarOpcionesDatalist() {
+    const datalist = document.getElementById('code-suggestions');
+
+    // Limpiar opciones existentes
+    datalist.innerHTML = '';
+
+    // Generar nuevas opciones basadas en la baseDatos
+    Object.keys(baseDatos).forEach(code => {
+        const option = document.createElement('option');
+        option.value = code;
+        datalist.appendChild(option);
+    });
+}
+
+// Llamar a la función al cargar la página
+document.addEventListener('DOMContentLoaded', generarOpcionesDatalist);
 
 /* ============================================================
    🔹 8. SUBMIT DEL FORMULARIO (CREATE / UPDATE)
