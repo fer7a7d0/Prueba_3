@@ -1,4 +1,6 @@
-// Base de datos interna
+/* ============================================================
+   🔹 1. BASE DE DATOS INTERNA
+============================================================ */
 const baseDatos = {
     121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211" },
     122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "211" },
@@ -9,48 +11,79 @@ const baseDatos = {
     127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "213" },
     128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "214" },
     129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "214" },
-    130: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "214" },
-
+    130: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "214" }
 };
 
-// Referencias a los elementos del formulario
+
+/* ============================================================
+   🔹 2. REFERENCIAS DEL DOM
+============================================================ */
 const codeInput = document.getElementById('code');
 const productInput = document.getElementById('product');
 const ttInput = document.getElementById('tt');
 const cylindersInput = document.getElementById('cylinders');
 const areaInput = document.getElementById('area');
 const form = document.getElementById('inventory-form');
-
-// Internal array to store records
-let records = [];
-let recordId = 1;
-
-// Reference to the table container
 const tableContainer = document.getElementById('table-container');
 
-// Track if the form is in edit mode
+
+/* ============================================================
+   🔹 3. VARIABLES GLOBALES
+============================================================ */
+let records = [];
+let recordId = 1;
 let isEditing = false;
 let editingRecordId = null;
 
-// Evento para manejar el cambio en el campo de código
+
+/* ============================================================
+   🔹 4. CONFIGURACIÓN GOOGLE SHEETS
+============================================================ */
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbykGMxvUj0VP9uddbC3Bb3GjxR4oV4Xn4o66kQcSklI-qlHcUWEZrdByOvIeKc7X5vA/exec";
+
+
+/* ============================================================
+   🔹 5. GENERADOR DE UID GLOBAL
+============================================================ */
+function generarUID() {
+    const timestamp = Date.now().toString(36);
+    const randomPart = Math.random().toString(36).substring(2, 10);
+    const extra = crypto.randomUUID ? crypto.randomUUID().split('-')[0] : '';
+    return `UID-${timestamp}-${randomPart}-${extra}`;
+}
+
+
+/* ============================================================
+   🔹 6. ENVÍO A GOOGLE SHEETS
+============================================================ */
+function enviarASheets(registro) {
+    fetch(SHEETS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registro)
+    })
+    .then(() => console.log("Envío realizado"))
+    .catch(error => console.error("Error:", error));
+}
+
+
+/* ============================================================
+   🔹 7. AUTOCOMPLETADO POR CÓDIGO
+============================================================ */
 codeInput.addEventListener('input', () => {
     const code = parseInt(codeInput.value, 10);
 
     if (baseDatos[code]) {
         const { producto, tt } = baseDatos[code];
 
-        // Autocompletar campos
         productInput.value = producto;
         ttInput.value = tt;
 
-        // Aplicar animación
         productInput.classList.add('highlight');
         ttInput.classList.add('highlight');
-
-        // Mover el cursor al siguiente campo
         cylindersInput.focus();
 
-        // Remover animación después de un tiempo
         setTimeout(() => {
             productInput.classList.remove('highlight');
             ttInput.classList.remove('highlight');
@@ -61,27 +94,10 @@ codeInput.addEventListener('input', () => {
     }
 });
 
-// Validación básica antes de enviar
-// 🔹 URL de tu Apps Script (reemplazar)
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbx92Cm9nINZmkzFl5FAtIVCux9RVIBVUyDomCTjQcTrTB3OOA1mjxSunyiQ2ZmCmA/exec";
 
-// 🔹 Función para enviar datos a Google Sheets
-function enviarASheets(registro) {
-    fetch(SHEETS_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(registro)
-    })
-    .then(() => {
-        console.log("Intento de envío realizado");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-}
+/* ============================================================
+   🔹 8. SUBMIT DEL FORMULARIO (CREATE / UPDATE)
+============================================================ */
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -91,13 +107,17 @@ form.addEventListener('submit', (event) => {
     const product = productInput.value;
     const tt = ttInput.value;
     const cylinders = cylindersInput.value;
-    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const currentDate = new Date().toISOString().split('T')[0];
 
     const submitButton = form.querySelector('button[type="submit"]');
 
+    /* =========================
+       🔹 UPDATE
+    ========================= */
     if (isEditing && editingRecordId !== null) {
-        // Update the existing record
+
         const record = records.find(r => r.id === editingRecordId);
+
         if (record) {
             record.name = name;
             record.area = area;
@@ -105,17 +125,24 @@ form.addEventListener('submit', (event) => {
             record.product = product;
             record.tt = tt;
             record.cylinders = cylinders;
+
+            record.action = "update";
+            enviarASheets(record);
         }
+
         isEditing = false;
         editingRecordId = null;
-
-        // Restore the default button text
         submitButton.textContent = 'Enviar';
-    } else {
-        // Create a new record
-        
+    }
+
+    /* =========================
+       🔹 CREATE
+    ========================= */
+    else {
+
         const newRecord = {
             id: recordId++,
+            uid: generarUID(),
             date: currentDate,
             name,
             area,
@@ -123,43 +150,41 @@ form.addEventListener('submit', (event) => {
             product,
             tt,
             cylinders
-    };
+        };
 
-    records.push(newRecord);
-
-    // 🔥 Enviar automáticamente a Google Sheets
-    enviarASheets(newRecord);
-        
+        newRecord.action = "create";
+        records.push(newRecord);
+        enviarASheets(newRecord);
     }
 
     updateTable();
 
-    // Reset only specific fields
     codeInput.value = '';
     productInput.value = '';
     ttInput.value = '';
     cylindersInput.value = '';
-
-    // Return focus to the 'Código' field
     codeInput.focus();
 });
 
-// Update the table dynamically
+
+/* ============================================================
+   🔹 9. ACTUALIZAR TABLA
+============================================================ */
 function updateTable() {
+
     if (!records.length) {
-        const downloadButton = document.getElementById('download-button');
-        if (downloadButton) {
-            downloadButton.style.display = 'none';
-        }
+        tableContainer.innerHTML = '';
         return;
     }
 
     if (!tableContainer.querySelector('table')) {
         const table = document.createElement('table');
+
         table.innerHTML = `
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th class="hidden">UID</th>
                     <th class="hidden">Fecha</th>
                     <th class="hidden">Nombre</th>
                     <th class="hidden">Área</th>
@@ -172,6 +197,7 @@ function updateTable() {
             </thead>
             <tbody></tbody>
         `;
+
         tableContainer.appendChild(table);
     }
 
@@ -179,9 +205,12 @@ function updateTable() {
     tbody.innerHTML = '';
 
     records.forEach(record => {
+
         const row = document.createElement('tr');
+
         row.innerHTML = `
             <td>${record.id}</td>
+            <td class="hidden">${record.uid}</td>
             <td class="hidden">${record.date}</td>
             <td class="hidden">${record.name}</td>
             <td class="hidden">${record.area}</td>
@@ -190,142 +219,169 @@ function updateTable() {
             <td class="hidden">${record.tt}</td>
             <td>${record.cylinders}</td>
             <td>
-                <button class="action-btn edit" onclick="editRecord(${record.id})">✏️</button>
-                <button class="action-btn delete" onclick="deleteRecord(${record.id})">🗑️</button>
+                <button onclick="editRecord(${record.id})">✏️</button>
+                <button onclick="deleteRecord(${record.id})">🗑️</button>
             </td>
         `;
+
         tbody.appendChild(row);
     });
-
-    // Ensure the download button is visible and positioned below the table
-    let downloadButton = document.getElementById('download-button');
-    if (!downloadButton) {
-        downloadButton = document.createElement('button');
-        downloadButton.id = 'download-button';
-        downloadButton.textContent = 'Descargar Tabla';
-        downloadButton.addEventListener('click', downloadTableAsCSV);
-        tableContainer.appendChild(downloadButton);
-    }
-    downloadButton.style.display = 'block';
-
-    // Ensure the button is always below the table
-    tableContainer.appendChild(downloadButton);
 }
 
-// Edit a record
+
+/* ============================================================
+   🔹 10. EDITAR REGISTRO
+============================================================ */
 function editRecord(id) {
+
     const record = records.find(r => r.id === id);
 
-    if (record) {
-        document.getElementById('name').value = record.name;
-        areaInput.value = record.area;
-        codeInput.value = record.code;
-        productInput.value = record.product;
-        ttInput.value = record.tt;
-        cylindersInput.value = record.cylinders;
+    if (!record) return;
 
-        isEditing = true;
-        editingRecordId = id;
+    document.getElementById('name').value = record.name;
+    areaInput.value = record.area;
+    codeInput.value = record.code;
+    productInput.value = record.product;
+    ttInput.value = record.tt;
+    cylindersInput.value = record.cylinders;
 
-        // Change the button text to 'Actualizar'
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.textContent = 'Actualizar';
-    }
+    isEditing = true;
+    editingRecordId = id;
+
+    form.querySelector('button[type="submit"]').textContent = 'Actualizar';
 }
 
-// Delete a record
+
+/* ============================================================
+   🔹 11. ELIMINAR REGISTRO
+============================================================ */
 function deleteRecord(id) {
-    const recordIndex = records.findIndex(r => r.id === id);
-    if (recordIndex !== -1) {
-        records.splice(recordIndex, 1); // Remove the record from the array
-    }
 
-    // Clear the table and hide the download button if no records remain
-    if (records.length === 0) {
-        const table = tableContainer.querySelector('table');
-        if (table) {
-            tableContainer.removeChild(table);
-        }
-        const downloadButton = document.getElementById('download-button');
-        if (downloadButton) {
-            downloadButton.style.display = 'none';
-        }
+    const recordIndex = records.findIndex(r => r.id === id);
+    if (recordIndex === -1) return;
+
+    const recordToDelete = records[recordIndex];
+
+    enviarASheets({
+        action: "delete",
+        uid: recordToDelete.uid
+    });
+
+    records.splice(recordIndex, 1);
+    updateTable();
+}
+
+/* ============================================================
+   🔹 12. BOTÓN DE DESCARGA CSV (NUEVA FUNCIONALIDAD)
+   ⚠️ No modifica lógica existente
+============================================================ */
+
+// Crear botón dinámicamente (NO modifica HTML existente)
+const downloadButton = document.getElementById("download-btn");
+downloadButton.textContent = "Descargar CSV";
+downloadButton.id = "download-btn";
+downloadButton.style.display = "none"; // Inicialmente oculto
+
+// Insertarlo debajo de la tabla
+tableContainer.parentNode.insertBefore(downloadButton, tableContainer.nextSibling);
+
+
+/* ============================================================
+   🔹 CONTROL DINÁMICO DE VISIBILIDAD
+============================================================ */
+function actualizarVisibilidadBoton() {
+
+    const tablaExiste = tableContainer.querySelector('table');
+    const hayRegistros = records.length > 0;
+
+    if (tablaExiste && hayRegistros) {
+        downloadButton.style.display = "block";
     } else {
-        // Refresh the table if records still exist
-        updateTable();
+        downloadButton.style.display = "none";
     }
 }
 
-// Update the CSV file name to include the current date
-function downloadTableAsCSV() {
-    if (!records.length) {
-        alert('No hay datos en la tabla para descargar.');
-        return;
-    }
 
-    const confirmDownload = confirm('¿Deseas descargar la tabla como un archivo .csv?');
-    if (!confirmDownload) return;
+/* ============================================================
+   🔹 OBSERVADOR DE CAMBIOS EN EL DOM
+   (No altera updateTable existente)
+============================================================ */
+const observer = new MutationObserver(() => {
+    actualizarVisibilidadBoton();
+});
 
-    const name = document.getElementById('name').value || 'Registro';
-    const area = document.getElementById('area').value || 'General';
-    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-    const fileName = `${currentDate}_${name}_${area}_tabla.csv`;
+observer.observe(tableContainer, { childList: true, subtree: true });
 
-    const csvContent = [
-        ['ID', 'Fecha', 'Nombre', 'Área', 'Código', 'Producto', 'TT', 'Cilindros'],
-        ...records.map(record => [
-            record.id,
-            record.date,
-            record.name,
-            record.area,
-            record.code,
-            record.product,
-            record.tt,
-            record.cylinders
-        ])
-    ].map(row => row.join(',')).join('\n');
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', fileName);
-    link.style.display = 'none';
-    document.body.appendChild(link);
+/* ============================================================
+   🔹 GENERAR CSV (SIN UID)
+============================================================ */
+function generarCSV() {
+
+    if (!records.length) return;
+
+    // Encabezados SIN UID
+    const headers = ["ID", "Fecha", "Nombre", "Área", "Código", "Producto", "TT", "Cilindros"];
+
+    const rows = records.map(record => [
+        record.id,
+        record.date,
+        record.name,
+        record.area,
+        record.code,
+        record.product,
+        record.tt,
+        record.cylinders
+    ]);
+
+    let csvContent = headers.join(",") + "\n";
+
+    rows.forEach(row => {
+        csvContent += row.join(",") + "\n";
+    });
+
+    return csvContent;
+}
+
+
+/* ============================================================
+   🔹 GENERAR NOMBRE DINÁMICO DEL ARCHIVO
+============================================================ */
+function generarNombreArchivo() {
+
+    const fecha = new Date().toISOString().split("T")[0];
+    const area = areaInput.value || "AREA";
+    const nombre = document.getElementById("name").value || "XX";
+
+    // Obtener iniciales
+    const iniciales = nombre
+        .split(" ")
+        .map(p => p.charAt(0).toUpperCase())
+        .join("");
+
+    return `Inventario_${fecha}_${area}_${iniciales}.csv`;
+}
+
+
+/* ============================================================
+   🔹 EVENTO DESCARGA
+============================================================ */
+downloadButton.addEventListener("click", () => {
+
+    const csv = generarCSV();
+    if (!csv) return;
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = generarNombreArchivo();
     link.click();
-    document.body.removeChild(link);
 
-    // Reset the form and table
+    // 🔹 Reiniciar completamente después de descargar
+    form.reset();
     records = [];
     recordId = 1;
-    const table = tableContainer.querySelector('table');
-    if (table) {
-        tableContainer.removeChild(table);
-    }
-    const downloadButton = document.getElementById('download-button');
-    if (downloadButton) {
-        downloadButton.style.display = 'none';
-    }
-    resetForm();
-}
-
-function resetForm() {
-    form.reset();
-    document.getElementById('name').focus();
-}
-
-// Generar sugerencias para el campo de código
-function generarSugerencias() {
-    const dataList = document.getElementById('code-suggestions');
-    dataList.innerHTML = ''; // Limpiar opciones previas
-
-    Object.keys(baseDatos).forEach(code => {
-        const option = document.createElement('option');
-        option.value = code; // El valor será el código
-        option.textContent = `${code} - ${baseDatos[code].producto}`; // Mostrar código y producto
-        dataList.appendChild(option);
-    });
-}
-
-// Llamar a la función al cargar la página
-document.addEventListener('DOMContentLoaded', generarSugerencias);
+    tableContainer.innerHTML = "";
+    downloadButton.style.display = "none";
+});

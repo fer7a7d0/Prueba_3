@@ -245,3 +245,19 @@ button:active {
         font-size: 0.9rem;
     }
 }
+
+#download-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+}
+
+#download-btn:hover {
+    background-color: #0056b3;
+}

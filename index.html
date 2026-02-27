@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- ============================================================
+         🔹 1. METADATOS Y RECURSOS
+    ============================================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Inventario 📝</title>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
+
+    <!-- ============================================================
+         🔹 2. CONTENEDOR PRINCIPAL
+         (Formulario + Tabla + Botón)
+    ============================================================ -->
     <div class="form-container">
-        <h1 class="form-title">Registro de Inventario <span class="icon">📝</span></h1>
+
+        <!-- 🔹 2.1 TÍTULO -->
+        <h1 class="form-title">
+            Registro de Inventario <span class="icon">📝</span>
+        </h1>
+
+        <!-- ========================================================
+             🔹 2.2 FORMULARIO DE REGISTRO
+        ======================================================== -->
         <form id="inventory-form">
+
+            <!-- Nombre -->
             <label for="name">Nombre</label>
             <select id="name" required>
-                <option value="">Seleccionar nombre</option>             
+                <option value="">Seleccionar nombre</option>
                 <option value="Christian Molina">Christian Molina</option>
                 <option value="Fernando Moreno">Fernando Moreno</option>
                 <option value="Humberto Huerta">Humberto Huerta</option>
@@ -20,6 +42,7 @@
                 <option value="Orlando Ibarra">Orlando Ibarra</option>
             </select>
 
+            <!-- Área -->
             <label for="area">Área</label>
             <select id="area" required>
                 <option value="">Seleccionar área</option>
@@ -30,24 +53,67 @@
                 <option value="Rampa 5 (CO2)">Rampa 5 (CO2)</option>
                 <option value="Rampa 6 (RACKS)">Rampa 6 (RACKS)</option>
                 <option value="Rampa 7 (DEWARS)">Rampa 7 (DEWARS)</option>
-                
             </select>
 
+            <!-- Código -->
             <label for="code">Código</label>
-            <input type="tel" id="code" list="code-suggestions" pattern="[0-9]*" inputmode="numeric" enterkeyhint="enter" required>
+            <input type="tel"
+                   id="code"
+                   list="code-suggestions"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   enterkeyhint="enter"
+                   required>
+
             <datalist id="code-suggestions"></datalist>
 
-            <input type="text" id="product" readonly placeholder="Descripción de producto">
-            <input type="text" id="tt" readonly placeholder="Tanque termo">
+            <!-- Producto (readonly) -->
+            <input type="text"
+                   id="product"
+                   readonly
+                   placeholder="Descripción de producto">
 
+            <!-- Tanque termo (readonly) -->
+            <input type="text"
+                   id="tt"
+                   readonly
+                   placeholder="Tanque termo">
+
+            <!-- Cilindros -->
             <label for="cylinders">Cilindros</label>
-            <input type="tel" id="cylinders" pattern="[0-9]*" inputmode="numeric" enterkeyhint="enter" required>
-            
+            <input type="tel"
+                   id="cylinders"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   enterkeyhint="enter"
+                   required>
+
+            <!-- Botón Enviar -->
             <button type="submit">Enviar</button>
+
         </form>
+
+        <!-- ========================================================
+             🔹 2.3 CONTENEDOR DE TABLA DINÁMICA
+             (Generada por JS)
+        ======================================================== -->
+        <div id="table-container"></div>
+
+        <!-- ========================================================
+             🔹 2.4 BOTÓN DE DESCARGA CSV
+             (Controlado por JS)
+        ======================================================== -->
+        <button id="download-btn" style="display:none;">
+            Descargar CSV
+        </button>
+
     </div>
-    <!-- Placeholder for Dynamic Table -->
-    <div id="table-container"></div>
+
+    <!-- ============================================================
+         🔹 3. SCRIPT PRINCIPAL
+    ============================================================ -->
     <script src="js/app.js"></script>
+
 </body>
+
 </html>
