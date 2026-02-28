@@ -2,16 +2,16 @@
    🔹 1. BASE DE DATOS INTERNA
 ============================================================ */
 const baseDatos = {
-    121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211" },
-    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "211" },
-    123: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
+    121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211 - Oxígeno" },
+    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "211 - Oxígeno" },
+    123: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211 - Oxígeno" },
     124: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212" },
     125: { producto: "NITROGENO LIQUIDO DEWAR 22 PSI", tt: "212" },
     126: { producto: "M3. ARGON LIQUIDO DEWARE", tt: "213" },
     127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "213" },
     128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "214" },
     129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "214" },
-    30006618: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "214" }
+    130: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "214" }
 };
 
 
@@ -368,11 +368,12 @@ function generarCSV() {
 ============================================================ */
 function generarNombreArchivo() {
 
-    const fecha = new Date().toISOString().split("T")[0];
+    const fecha = new Date().toLocaleDateString("sv-SE"); 
+    // sv-SE devuelve formato YYYY-MM-DD
+
     const area = areaInput.value || "AREA";
     const nombre = document.getElementById("name").value || "XX";
 
-    // Obtener iniciales
     const iniciales = nombre
         .split(" ")
         .map(p => p.charAt(0).toUpperCase())
