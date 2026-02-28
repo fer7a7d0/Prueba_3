@@ -158,13 +158,13 @@ button:active {
 #table-container th {
     background: var(--color-bg);
     color: var(--color-text);
-    font-size: 0.85rem;
-    padding: 12px;
+    font-size: 0.8rem;
+    padding: 10px;
 }
 
 /* Celdas */
 #table-container td {
-    padding: 12 px;
+    padding: 10px;
     font-size: 0.8rem;
     border-top: 1px solid var(--color-border);
     text-align: center;
