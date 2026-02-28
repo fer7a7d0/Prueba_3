@@ -2,16 +2,16 @@
    🔹 1. BASE DE DATOS INTERNA
 ============================================================ */
 const baseDatos = {
-    121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211 - Oxígeno" },
-    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "211 - Oxígeno" },
-    123: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211 - Oxígeno" },
+    121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211" },
+    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "214" },
+    123: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
     124: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212" },
     125: { producto: "NITROGENO LIQUIDO DEWAR 22 PSI", tt: "212" },
-    126: { producto: "M3. ARGON LIQUIDO DEWARE", tt: "213" },
-    127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "213" },
-    128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "214" },
-    129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "214" },
-    130: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "214" }
+    126: { producto: "M3. ARGON LIQUIDO DEWARE", tt: "214" },
+    127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "217" },
+    128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
+    129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212" },
+    130: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "217" }
 };
 
 
@@ -257,6 +257,11 @@ function editRecord(id) {
 
     if (!record) return;
 
+    // Mostrar el formulario si está oculto
+    const formContainer = document.querySelector('.form-container');
+    formContainer.style.display = 'block';
+
+    // Rellenar los campos del formulario con los datos del registro
     document.getElementById('name').value = record.name;
     areaInput.value = record.area;
     codeInput.value = record.code;
@@ -264,11 +269,24 @@ function editRecord(id) {
     ttInput.value = record.tt;
     cylindersInput.value = record.cylinders;
 
+    // Resaltar el formulario para indicar que está en modo edición
+    formContainer.classList.add('editing-mode');
+
     isEditing = true;
     editingRecordId = id;
 
     form.querySelector('button[type="submit"]').textContent = 'Actualizar';
+
+    // Enfocar el primer campo del formulario
+    document.getElementById('cylinders').focus();
 }
+
+// Eliminar la clase de edición cuando se envíe el formulario
+form.addEventListener('submit', () => {
+    const formContainer = document.querySelector('.form-container');
+    formContainer.classList.remove('editing-mode');
+});
+
 
 
 /* ============================================================
