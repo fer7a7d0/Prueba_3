@@ -278,7 +278,7 @@ function editRecord(id) {
     form.querySelector('button[type="submit"]').textContent = 'Actualizar';
 
     // Enfocar el primer campo del formulario
-    document.getElementById('cylinders').focus();
+    document.getElementById('code').focus();
 }
 
 // Eliminar la clase de edición cuando se envíe el formulario
