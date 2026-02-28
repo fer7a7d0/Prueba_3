@@ -189,10 +189,10 @@ button:active {
    7️⃣ BOTONES DE ACCIÓN
 ====================================================== */
 .action-btn {
-    background: none;
+    background: transparent !important;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 8px;
     transition: var(--transition);
 }
 
