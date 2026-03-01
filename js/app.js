@@ -196,6 +196,7 @@ form.addEventListener('submit', (event) => {
         newRecord.action = "create";
         records.push(newRecord);
         enviarASheets(newRecord);
+        codeInput.focus();
     }
 
     updateTable();
@@ -204,7 +205,8 @@ form.addEventListener('submit', (event) => {
     productInput.value = '';
     ttInput.value = '';
     cylindersInput.value = '';
-    codeInput.focus();
+    
+
 });
 
 
