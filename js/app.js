@@ -245,8 +245,8 @@ function updateTable() {
     const tbody = tableContainer.querySelector('tbody');
     tbody.innerHTML = '';
 
-    records.forEach(record => {
-
+    // Mostrar los registros en orden inverso
+    records.slice().reverse().forEach(record => {
         const row = document.createElement('tr');
 
         row.innerHTML = `
