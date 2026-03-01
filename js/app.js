@@ -147,6 +147,17 @@ form.addEventListener('submit', (event) => {
 
             record.action = "update";
             enviarASheets(record);
+
+            // Enfocar y resaltar el registro actualizado
+            updateTable(); // Asegurarse de que la tabla esté actualizada
+            const filas = document.querySelectorAll('#table-container tbody tr');
+            filas.forEach(fila => {
+                if (fila.children[0].textContent == record.id) {
+                    fila.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    fila.classList.add('highlight');
+                    setTimeout(() => fila.classList.remove('highlight'), 2000);
+                }
+            });
         }
 
         isEditing = false;
@@ -277,8 +288,8 @@ function editRecord(id) {
 
     form.querySelector('button[type="submit"]').textContent = 'Actualizar';
 
-    // Enfocar el primer campo del formulario
-    document.getElementById('code').focus();
+    // Enfocar el campo de cylinders del formulario
+    document.getElementById('cylinders').focus();
 }
 
 // Eliminar la clase de edición cuando se envíe el formulario
