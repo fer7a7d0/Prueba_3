@@ -117,7 +117,8 @@ function generarOpcionesDatalist() {
     // Generar nuevas opciones basadas en la baseDatos
     Object.keys(baseDatos).forEach(code => {
         const option = document.createElement('option');
-        option.value = code;
+         option.value = code; // El valor del código
+         option.textContent = `${code} - ${baseDatos[code].producto}`; // Código y descripción
         datalist.appendChild(option);
     });
 }
@@ -413,7 +414,7 @@ function generarNombreArchivo() {
     const fecha = new Date().toLocaleDateString("sv-SE"); 
     // sv-SE devuelve formato YYYY-MM-DD
 
-    const area = areaInput.value || "AREA";
+    const area = "Área " + areaInput.value || "AREA";
     const nombre = document.getElementById("name").value || "XX";
 
     const iniciales = nombre
