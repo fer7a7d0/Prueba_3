@@ -422,7 +422,7 @@ function generarNombreArchivo() {
         .map(p => p.charAt(0).toUpperCase())
         .join("");
 
-    return `Inventario_${fecha}_${area}_${iniciales}.csv`;
+    return `Inventario gases_${fecha}_${area}_${iniciales}.csv`;
 }
 
 
