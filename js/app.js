@@ -2,16 +2,27 @@
    🔹 1. BASE DE DATOS INTERNA
 ============================================================ */
 const baseDatos = {
-    121: { producto: "OXIGENO LIQUIDO EN DEWARS", tt: "211" },
-    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "214" },
-    123: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
-    124: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212" },
-    125: { producto: "NITROGENO LIQUIDO DEWAR 22 PSI", tt: "212" },
-    126: { producto: "M3. ARGON LIQUIDO DEWARE", tt: "214" },
-    127: { producto: "M3. HELIO LIQUIDO DEWARE", tt: "217" },
-    128: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211" },
-    129: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212" },
-    130: { producto: "M3. HELIO LIQUIDO DEWARE HELIO LIQUIDO DEWARE", tt: "217" }
+    122: { producto: "ARGON LIQUIDO EN DEWARS", tt: "214 - Argón" },
+    130: { producto: "M3. OXIGENO LIQUIDO DEWARE", tt: "211 - Oxígeno" },
+    131: { producto: "M3. NITROGENO LIQUIDO DEWARE", tt: "212 - Nitrógeno" },
+    133: { producto: "NITROGENO LIQUIDO DEWAR 22 PSI", tt: "212 - Nitrógeno" },
+    138: { producto: "M3 NITROGENO DEWAR ABIERTO", tt: "212 - Nitrógeno" },
+    206: { producto: "M3. OXIGENO MEDICIN.LIQUID.THERMO DW", tt: "211 - Oxígeno" },
+    222: { producto: "ACETILENO KG. MCA INFRA VALVULA CGA", tt: "212 - Nitrógeno" },
+    239: { producto: "NITROGENO INDUSTRIAL MEGADEWAR 230L", tt: "212 - Nitrógeno" },
+    246: { producto: "NITROGENO SPARKLASER DEWAR 230L (350PSI)", tt: "212 - Nitrógeno" },
+    247: { producto: "NITROGENO LIQ FRESCOPACK DEWAR 230LTS (22 PSI)", tt: "212 - Nitrógeno" },
+    270: { producto: "NITROGENO IND. LIQUIDO MINIBULK 230 LTS.", tt: "212 - Nitrógeno" },
+    385: { producto: "CO2 INDUSTRIAL LIQUIDO DEWAR 230LTS (350PSI)", tt: "213 - Co2" },
+    386: { producto: "NITROGENO 4.7 LIQ DEWAR 230LTS (350PSI)", tt: "212 - Nitrógeno" },
+    387: { producto: "NITROGENO LIQUIDO FRESCOPACK DEWAR 230LTS (350PSI)", tt: "212 - Nitrógeno" },
+    388: { producto: "NITROGENO LIQUIDO INDUSTRIAL DEWAR 230LTS (350PSI)", tt: "212 - Nitrógeno" },
+    389: { producto: "OXIGENO LIQUIDO SPARK LASER ASISTENCIA DEWAR 230LT", tt: "211 - Oxígeno" },
+    396: { producto: "ARGON INDUSTRIAL LIQUIDO DEWAR 230LTS (350PSI)", tt: "214 - Argón" },
+    397: { producto: "OXIGENO INDUSTRIAL LIQUIDO  DEWAR 230LTS (350PSI)", tt: "211 - Oxígeno" },
+    398: { producto: "OXIGENO MEDICINAL LIQUIDO DEWAR 230 LTS (350PSI)", tt: "211 - Oxígeno" },
+
+
 };
 
 
@@ -288,8 +299,8 @@ function editRecord(id) {
 
     form.querySelector('button[type="submit"]').textContent = 'Actualizar';
 
-    // Enfocar el campo de cylinders del formulario
-    document.getElementById('cylinders').focus();
+    // Enfocar el campo de code del formulario
+    document.getElementById('code').focus();
 }
 
 // Eliminar la clase de edición cuando se envíe el formulario
