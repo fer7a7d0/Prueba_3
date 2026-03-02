@@ -24,7 +24,6 @@ const baseDatos = {
     396: { producto: "ARGON INDUSTRIAL LIQUIDO DEWAR 230LTS (350PSI)", tt: "214" },
     397: { producto: "OXIGENO INDUSTRIAL LIQUIDO  DEWAR 230LTS (350PSI)", tt: "211" },
     398: { producto: "OXIGENO MEDICINAL LIQUIDO DEWAR 230 LTS (350PSI)", tt: "211" },
-    431: { producto: "C02 GAS", tt: "213" },
     433: { producto: "BIOXIDO DE CARBONO CON SIFON", tt: "213" },
     443: { producto: "CO2 USP", tt: "213" },
     445: { producto: "BIOXIDO DE CARBONO GASEOSO GRADO USP CIL C/SIFON", tt: "213" },
@@ -1213,4 +1212,5 @@ downloadButton.addEventListener("click", () => {
     tableContainer.innerHTML = "";
     downloadButton.style.display = "none";
 });
+
 
