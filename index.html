@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busqueda de Código</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- 🔹 2.1 TÍTULO -->
+        <h1 class="form-title" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+            <img src="img/logo-sipm.png" alt="SIPM Logo" style="max-width: 140px;">
+            
+        </h1>
+        
+        <h1>
+            🔎Busqueda de producto</h1>
+
+        <p class="subtitle">Escribe código o descripción del producto</p>
+
+        <!-- ============================= -->
+        <!-- CAMPO ÚNICO DE BÚSQUEDA -->
+        <!-- ============================= -->
+        <div class="form-group">
+            <input type="text" id="busqueda" placeholder="Ej. 101060 o Oxígeno" required>
+        </div>
+
+        <!-- ============================= -->
+        <!-- RESULTADOS -->
+        <!-- ============================= -->
+        <div id="resultado" class="resultado"></div>
+
+    </div>
+
+    <footer>
+        Sistema Profesional de Búsqueda
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
