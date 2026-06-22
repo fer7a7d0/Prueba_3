@@ -2,9 +2,14 @@
     --primary: #6d6b6b;
     --background: #f4f7fb;
     --card: #ffffff;
+    --text: #1f2933;
+    --muted: #555;
+    --border: #d7dde5;
+    --header: #f0f0f0;
     --green: #2e7d32;
     --orange: #ef6c00;
     --shadow: 0 8px 25px rgba(0,0,0,0.08);
+    color-scheme: light dark;
 }
 
 * {
@@ -16,6 +21,7 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     background: var(--background);
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,16 +46,18 @@ h1 {
 .subtitle {
     text-align: center;
     margin: 10px 0 25px;
-    color: #555;
+    color: var(--muted);
 }
 
 input {
     width: 100%;
     padding: 14px;
     border-radius: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     font-size: 1rem;
     transition: 0.3s;
+    background: var(--card);
+    color: var(--text);
 }
 
 input:focus {
@@ -78,7 +86,7 @@ th, td {
 }
 
 th {
-    background-color: #f0f0f0;
+    background-color: var(--header);
 }
 
 .exacto {
@@ -102,12 +110,31 @@ th {
 footer {
     margin-top: 20px;
     font-size: 0.8rem;
-    color: #777;
+    color: var(--muted);
 }
 
 @media (max-width: 480px) {
     .container {
         padding: 25px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #c7c9cc;
+        --background: #0b1220;
+        --card: #121a2a;
+        --text: #e5eef8;
+        --muted: #a7b0be;
+        --border: #2a3444;
+        --header: #1a2434;
+        --green: #7ddc8c;
+        --orange: #ffb357;
+        --shadow: 0 10px 28px rgba(0,0,0,0.32);
+    }
+
+    input:focus {
+        box-shadow: 0 0 0 2px rgba(125, 220, 140, 0.18);
     }
 }
 

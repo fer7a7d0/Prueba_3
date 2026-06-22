@@ -785,9 +785,6 @@ const productos = [
 
 
 
-
-
-
 ];
 
 
